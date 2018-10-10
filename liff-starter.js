@@ -9,14 +9,6 @@ window.onload = function (e) {
     });
 };
 
-function getP(){
-    var tipe = getParameterByName('type')
-    if (!tipe) {
-        document.getElementById('home').src = 'bg.jpg';
-    } else {
-        makeList();
-    }
-    }
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
