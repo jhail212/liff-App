@@ -13,7 +13,8 @@ function initializeApp(){
     var type = getParameterByName('type')
     if (type=== "text") {
         liff.sendMessages([{type: 'text',text: getParameterByName('text')}]).then(function () {liff.closeWindow()});
-    }else if(type=="sticker"){
+    };
+    if(type=="sticker"){
         var stk = getParameterByName('tstk');
         var sid = getParameterByName('stkid');
         var pkg = getParameterByName('stkpkgid');
@@ -52,7 +53,8 @@ function initializeApp(){
         }]).then(function () {
             liff.closeWindow();
         });
-    }else if (type === 'audio') {
+    };
+    if (type === 'audio') {
         liff.sendMessages([{
             type: 'audio',
             originalContentUrl: getParameterByName('link'),
@@ -60,7 +62,8 @@ function initializeApp(){
         }]).then(function () {
             liff.closeWindow();
         });
-    }else if (tipe === 'image') {
+    };
+    if (tipe === 'image') {
         liff.sendMessages([{
             type: 'image',
             originalContentUrl: getParameterByName('img'),
@@ -68,7 +71,8 @@ function initializeApp(){
         }]).then(function () {
             liff.closeWindow();
         });
-    }else if (tipe === 'video') {
+    };
+    if (tipe === 'video') {
         liff.sendMessages([{
             type: 'video',
             originalContentUrl: getParameterByName('ocu'),
