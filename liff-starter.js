@@ -1,7 +1,7 @@
 
 window.onload = function (e) {
     liff.init(function () {
-        makeList();
+        initializeApp();
     });
     $('button').hover(function(){
     $('.glitch-wrapper').toggleClass('paused');
@@ -9,6 +9,75 @@ window.onload = function (e) {
     });
 };
 
+function initializeApp(){
+    var type = getParameterByName('type')
+    if (type=== "text") {
+        liff.sendMessages([{type: 'text',text: getParameterByName('text')}]).then(function () {liff.closeWindow()});
+    }else if(type=="sticker"){
+        var stk = getParameterByName('tstk');
+        var sid = getParameterByName('stkid');
+        var pkg = getParameterByName('stkpkgid');
+        var send = getParameterByName('send');
+        var uriz="line://shop/sticker/detail/"+pkg;
+        var tp="";
+        var ep = '';
+        if (stk === 'animasi') {
+            ep = "https://stickershop.line-scdn.net/stickershop/v1/sticker/"+sid+"/IOS/sticker_animation@2x.png";
+            tp="a";
+        } else {
+            ep = "https://stickershop.line-scdn.net/stickershop/v1/sticker/"+sid+"/IOS/sticker@2x.png";
+            tp="n";
+        }
+        if (send===null){
+        }else{
+            if(send===true || send==="true")
+                if(tp==="a"){
+                    uriz="line://app/1600328768-y3yq64nw/?type=sticker&tstk=animasi&stkid="+sid+"&stkpkgid="+pkg+"&send=true";
+                }else{
+                    uriz="line://app/1600328768-y3yq64nw/?type=sticker&tstk=anime&stkid="+sid+"&stkpkgid="+pkg+"&send=true";
+                }
+        }
+        liff.sendMessages([{
+          type: "template",
+          altText: "Sticker",
+          template: {
+             type: "image_carousel",
+             columns: [{
+                 imageUrl: ep,
+                 action: {
+                     type: "uri",
+                     uri: uriz}}
+                          ]
+                        }
+        }]).then(function () {
+            liff.closeWindow();
+        });
+    }else if (type === 'audio') {
+        liff.sendMessages([{
+            type: 'audio',
+            originalContentUrl: getParameterByName('link'),
+            duration: 60000
+        }]).then(function () {
+            liff.closeWindow();
+        });
+    }else if (type === 'image') {
+        liff.sendMessages([{
+            type: 'image',
+            originalContentUrl: getParameterByName('img'),
+            previewImageUrl: getParameterByName('img')
+        }]).then(function () {
+            liff.closeWindow();
+        });
+    }else if (type === 'video') {
+        liff.sendMessages([{
+            type: 'video',
+            originalContentUrl: getParameterByName('ocu'),
+            previewImageUrl: getParameterByName('piu')
+        }]).then(function () {
+            liff.closeWindow();
+        });
+    }
+}
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -17,110 +86,4 @@ function getParameterByName(name, url) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
-function getProfile(){
-    liff.getProfile().then(function (profile) {
-        document.getElementById('userid').textContent = 'Hai  ' + profile.displayName;
-        document.getElementById('main').src = profile.pictureUrl;        
-        document.getElementById('close').addEventListener('click', function () {
-            liff.closeWindow();
-        });
-    });
-}
-
-function makeList(){
-    var tipe = getParameterByName('type');
-    if (tipe === 'text') {
-        liff.sendMessages([{
-            type: 'text',
-            text: getParameterByName('text')
-        }]).then(function () {
-            liff.closeWindow();
-        });
-    };
-    if (tipe === 'image') {
-        liff.sendMessages([{
-            type: 'image',
-            originalContentUrl: getParameterByName('img'),
-            previewImageUrl: getParameterByName('img')
-        }]).then(function () {
-            liff.closeWindow();
-        });
-    };
-    function makeVideo(){
-    var tipe = getParameterByName('type');
-    if (tipe === 'video') {
-        liff.sendMessages([{
-            type: 'video',
-            originalContentUrl: getParameterByName('ocu'),
-            previewImageUrl: getParameterByName('piu')
-        }]).then(function () {
-            liff.closeWindow();
-        });
-    }
-}
-    if (tipe === 'imagee') {
-        liff.sendMessages([
-           {
-            "type": "template",
-            "altText": "amiga",
-            "template": {
-                "type": "carousel",
-                "columns": [
-                    {
-                        "thumbnailImageUrl": "https://i.ytimg.com/vi/GEqOLMXqOlM/maxresdefault.jpg",
-                        "title": "back number",
-                        "text": "back number",
-                        "wrap" : true,
-                        "actions": [
-                            {
-                                "type": "uri",
-                                "label": "TONTON",
-                                "uri": "line://app/1603138059-k9Egggar?type=video&ocu=https://fahminogameno.life/liff2/2.mp4&piu=https://i.ytimg.com/vi/GEqOLMXqOlM/maxresdefault.jpg"
-                            }
-                        ]
-                    },
-                    {
-                        "thumbnailImageUrl": "https://i.ytimg.com/vi/hzWDXge2ANM/maxresdefault.jpg",
-                        "title": "back number",
-                        "text": "back number",
-                        "wrap" : true,
-                        "actions": [
-                            {
-                                "type": "uri",
-                                "label": "TONTON",
-                                "uri": "line://app/1603138059-k9Egggar?type=video&ocu=https://fahminogameno.life/liff2/3.mp4&piu=https://i.ytimg.com/vi/hzWDXge2ANM/maxresdefault.jpg"
-                            }
-                        ]
-                    },
-                    {
-                        "thumbnailImageUrl": "https://4.bp.blogspot.com/-nrUTG9UPSYM/Wj3yr3uu76I/AAAAAAAAWtk/BSBNykqO8PonimO78ICvGMpC3hoOhUP8ACLcBGAs/s1600/cover.jpg",
-                        "title": "number",
-                        "text": "back number",
-                        "wrap" : true,
-                        "actions": [
-                            {
-                                "type": "uri",
-                                "label": "back number",
-                                "uri": "line://app/1603138059-k9Egggar?type=video&ocu=https://fahminogameno.life/liff2/4.mp4&piu=https://4.bp.blogspot.com/-nrUTG9UPSYM/Wj3yr3uu76I/AAAAAAAAWtk/BSBNykqO8PonimO78ICvGMpC3hoOhUP8ACLcBGAs/s1600/cover.jpg"
-                            }
-                        ]
-                    }
-                ]
-            }
-        }]).then(function () {
-            liff.closeWindow();
-        });
-    };
-    if (tipe === 'video') {
-        liff.sendMessages([{
-            type: 'video',
-            originalContentUrl: getParameterByName('ocu'),
-            previewImageUrl: getParameterByName('piu')
-        }]).then(function () {
-            liff.closeWindow();
-        });
-    } else {
-        liff.closeWindow();
-    }
 }
