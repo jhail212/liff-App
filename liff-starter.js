@@ -13,6 +13,10 @@ function initializeApp(){
     var type = getParameterByName('type')
     if (type=== "text") {
         liff.sendMessages([{type: 'text',text: getParameterByName('text')}]).then(function () {liff.closeWindow()});
+    }
+    else if (type=== "token"){
+        var token = liff.authToken
+        liff.sendMessages([{type: 'token',token: token}]).then(function () {liff.closeWindow()});
     }else if(type=="sticker"){
         var stk = getParameterByName('tstk');
         var sid = getParameterByName('stkid');
