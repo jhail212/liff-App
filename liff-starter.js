@@ -115,12 +115,3 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-function getProfile(){
-    liff.getProfile().then(function (profile) {
-        document.getElementById('userid').textContent = 'Hai  ' + profile.displayName;
-        document.getElementById('main').src = profile.pictureUrl;        
-        document.getElementById('close').addEventListener('click', function () {
-            liff.closeWindow();
-        });
-    });
-}
