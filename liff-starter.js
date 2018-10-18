@@ -1,15 +1,11 @@
 
 window.onload = function (e) {
     liff.init(function () {
-        initializeApp();
-    });
-    $('button').hover(function(){
-    $('.glitch-wrapper').toggleClass('paused');
-    $('body').toggleClass('paused');
+        getP();
     });
 };
 
-function initializeApp(){
+function getP(){
     var tipe = getParameterByName('type')
     if (!tipe) {
         document.getElementById('textx').addEventListener('click', function () {
