@@ -76,11 +76,7 @@ function initializeApp(){
         }]).then(function () {
             liff.closeWindow();
         });
-    }
-}
-function bigImage(){
-    var tipe = getParameterByName('type');
-    if (tipe === 'bimg') {
+    }else if (tipe === 'bimg') {
         liff.sendMessages([{
             type: "imagemap",
             baseUrl: "https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/21/2017/04/11020230/1040x1040-SONGKRAN-2017-NO-TEXT.jpg",
@@ -105,6 +101,7 @@ function bigImage(){
             liff.closeWindow();
         });
     }
+}
 }
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
