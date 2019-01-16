@@ -76,32 +76,7 @@ function initializeApp(){
         }]).then(function () {
             liff.closeWindow();
         });
-    }else if (tipe === 'bimg') {
-        liff.sendMessages([{
-            type: "imagemap",
-            baseUrl: "https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/21/2017/04/11020230/1040x1040-SONGKRAN-2017-NO-TEXT.jpg",
-            altText: "imagemap",
-            baseSize: {
-              height: 1040,
-              width: 1040
-            },
-            actions: [
-              {
-                type: "uri",
-                linkUri: "https://www.facebook.com",
-                area: {
-                  x: 0,
-                  y: 0,
-                  width: 520,
-                  height: 1040
-                }
-              }
-            ]
-        }]).then(function () {
-            liff.closeWindow();
-        });
     }
-}
 }
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
